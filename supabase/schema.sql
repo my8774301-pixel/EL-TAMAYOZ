@@ -238,7 +238,7 @@ alter publication supabase_realtime add table public.messages;
 
 -- =====================================================================
 -- TEACHER ACCOUNT (run AFTER creating the auth user, see README step 4)
---   email: teacher@tamayoz.local   password: محمد الهريسي
+--   email: teacher@tamayoz.local   password: 'محمد الهريسي',
 -- update public.profiles
 --   set role = 'teacher', username = 'محمد مرجان', full_name = 'محمد مرجان',
 --       approved = true, blocked = false
