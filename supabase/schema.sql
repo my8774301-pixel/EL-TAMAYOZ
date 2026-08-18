@@ -237,10 +237,17 @@ create policy "authenticated read media" on storage.objects
 alter publication supabase_realtime add table public.messages;
 
 -- =====================================================================
--- TEACHER ACCOUNT (run AFTER creating the auth user, see README step 4)
---   email: teacher@tamayoz.local   password: 'محمد الهريسي',
--- update public.profiles
---   set role = 'teacher', username = 'محمد مرجان', full_name = 'محمد مرجان',
---       approved = true, blocked = false
---   where id = (select id from auth.users where email = 'teacher@tamayoz.local');
+-- تحديث حساب المعلم في public.profiles
+UPDATE public.profiles
+SET
+  role = 'teacher',
+  username = 'محمد مرجان',
+  full_name = 'محمد مرجان',
+  approved = true,
+  blocked = false
+WHERE id = (
+  SELECT id
+  FROM auth.users
+  WHERE email = 'teacher@tamayoz.local'
+);
 -- =====================================================================
