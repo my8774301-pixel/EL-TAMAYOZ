@@ -87,7 +87,7 @@ export function resetThrottle(key: string) {
 /** Username -> internal auth email (Supabase Auth requires an email identifier). */
 export const AUTH_DOMAIN = "tamayoz.local";
 export function usernameToEmail(username: string): string {
-  return `${username.toLowerCase("محمد مرجان")}@${AUTH_DOMAIN}`;
+  return `${username.toLowerCase()}@${AUTH_DOMAIN}`;
 }
 
 /** Fixed teacher credentials mapping (teacher account is seeded in Supabase). */
