@@ -1,4 +1,4 @@
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
 import StudentAuth from "./pages/StudentAuth";
 import StudentDashboard from "./pages/StudentDashboard";
@@ -17,7 +17,6 @@ export default function App() {
   }
 
    return (
-    <HashRouter>
       <Routes>
       <Route
         path="/"
@@ -40,6 +39,5 @@ export default function App() {
       />
       <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-    </HashRouter>
   );
 }
