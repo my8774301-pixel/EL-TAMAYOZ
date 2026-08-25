@@ -69,13 +69,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     : emailFor(username);
 
 const { data, error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
   email: loginEmail,
   password,
 });
 
-if (error) {
-  console.error("LOGIN ERROR:", error.message);
-  return { error: error.message };
+if (error || !data.user) {
+  console.error("LOGIN ERROR:", String(error));
+  return { error: "Invalid username or password." };
 }
     if (error) {
   console.error("SUPABASE LOGIN ERROR:", error);
