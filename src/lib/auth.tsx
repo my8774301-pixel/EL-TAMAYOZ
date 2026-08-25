@@ -1,4 +1,4 @@
-١import {
+import {
   createContext,
   useCallback,
   useContext,
@@ -86,9 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     loadProfile().finally(() => setLoading(false));
 
-    const {
-      data: sub,
-    } = supabase.auth.onAuthStateChange((event) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
       if (
         event === "SIGNED_IN" ||
         event === "SIGNED_OUT" ||
