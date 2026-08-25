@@ -63,10 +63,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     username.trim() === TEACHER_USERNAME_AR ? TEACHER_EMAIL : usernameToEmail(clean(username, 40));
 
   const signIn: AuthState["signIn"] = async (username, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: emailFor(username),
-      password,
-    });
+    const loginEmail =
+  username.trim() === "محمد مرجان"
+    ? "teacher@tamayoz.local"
+    : emailFor(username);
+
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: loginEmail,
+  password,
+});
+
+if (error) {
+  console.error("LOGIN ERROR:", error.message);
+  return { error: error.message };
+}
     if (error) {
   console.error("SUPABASE LOGIN ERROR:", error);
   return { error: error.message };
