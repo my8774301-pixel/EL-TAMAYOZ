@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
 import StudentAuth from "./pages/StudentAuth";
 import StudentDashboard from "./pages/StudentDashboard";
@@ -16,8 +16,9 @@ export default function App() {
     );
   }
 
-  return (
-    <Routes>
+   return (
+    <HashRouter>
+      <Routes>
       <Route
         path="/"
         element={
@@ -38,6 +39,7 @@ export default function App() {
         element={profile?.role === "teacher" ? <TeacherDashboard /> : <Navigate to="/" replace />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+          </Routes>
+    </HashRouter>
   );
 }
