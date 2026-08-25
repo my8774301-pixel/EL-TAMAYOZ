@@ -67,7 +67,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       email: emailFor(username),
       password,
     });
-    if (error || !data.user) return { error: "Invalid username or password." };
+    if (error) {
+  console.error("SUPABASE LOGIN ERROR:", error);
+  return { error: error.message };
+}
+
+if (!data.user) {
+  return { error: "No user returned from Supabase." };
+}
 
     const { data: p } = await supabase.from("profiles").select("*").eq("id", data.user.id).maybeSingle();
     const prof = p as Profile | null;
