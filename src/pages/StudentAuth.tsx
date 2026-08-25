@@ -41,7 +41,10 @@ export default function StudentAuth() {
     const limited = throttle(`login:${username}`);
     if (limited) return setErr(limited);
     setBusy(true);
-    const res = await signIn(username, password);
+    const res = await signIn(
+  isTeacher ? "teacher@tamayoz.local" : username,
+  password
+);
     setBusy(false);
     if (res.error) return setErr(res.error);
     resetThrottle(`login:${username}`);
