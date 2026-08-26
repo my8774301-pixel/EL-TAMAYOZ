@@ -1,26 +1,29 @@
 import { createClient } from "@supabase/supabase-js";
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
 
 export const isSupabaseConfigured = Boolean(url && key);
 
 if (!isSupabaseConfigured) {
-  // Fail loudly in dev, never silently fall back to an insecure mock.
   console.warn(
-    "[El Tamayoz] Missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY. Copy .env.example to .env and fill them in.",
+    "[El Tamayoz] Missing VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY."
   );
 }
 
-export const supabase = createClient(url ?? "http://localhost", key ?? "public-anon-key", {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: false,
-    storageKey: "tamayoz-auth",
-    flowType: "pkce",
-  },
-});
+export const supabase = createClient(
+  url ?? "http://localhost",
+  key ?? "public-anon-key",
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: false,
+      storageKey: "tamayoz-auth",
+      flowType: "pkce",
+    },
+  }
+);
 
 /** Grades offered by the platform. */
 export const GRADES = [
@@ -34,5 +37,7 @@ export const GRADES = [
 
 export type GradeId = (typeof GRADES)[number]["id"];
 
-export const gradeLabel = (id: string, lang: "en" | "ar" = "en") =>
-  GRADES.find((g) => g.id === id)?.[lang] ?? id;
+export const gradeLabel = (
+  id: string,
+  lang: "en" | "ar" = "en"
+) => GRADES.find((g) => g.id === id)?.[lang] ?? id;
