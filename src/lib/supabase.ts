@@ -1,13 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
+const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
 export const isSupabaseConfigured = Boolean(url && key);
 
 if (!isSupabaseConfigured) {
   console.warn(
-    "[El Tamayoz] Missing VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY."
+    "[El Tamayoz] Missing VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY."
   );
 }
 
@@ -25,7 +25,6 @@ export const supabase = createClient(
   }
 );
 
-/** Grades offered by the platform. */
 export const GRADES = [
   { id: "prep1", en: "Grade 7 (Prep 1)", ar: "أولى إعدادي" },
   { id: "prep2", en: "Grade 8 (Prep 2)", ar: "تانية إعدادي" },
